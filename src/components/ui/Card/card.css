@@ -1,0 +1,32 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  background-color: var(--white);
+  box-shadow: 0 1px 8px var(--shadow);
+}
+
+.card__img {
+  /* width: 25px; */
+  aspect-ratio: 0.66;
+  border-radius: 12px 12px 0 0;
+}
+
+.card__wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}
+
+.card__title {
+  color: var(--title);
+  margin: 0;
+}
+.card__author {
+  color: var(--text);
+  margin: 0;
+}
+.card__year {
+  color: var(--text);
+}

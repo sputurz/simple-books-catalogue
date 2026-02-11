@@ -1,0 +1,38 @@
+.header {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 60px;
+}
+
+.header__wrap {
+  display: flex;
+  padding: 20px 0 20px 15px;
+}
+
+.header__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header__logo {
+  background-color: var(--green);
+  padding: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+}
+
+.header__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header__title {
+  font-family: 'Playfair Display', serif;
+  color: var(--title);
+}
+
+.header__slogan {
+  color: var(--text);
+}
