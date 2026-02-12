@@ -8,6 +8,7 @@
   position: relative;
   display: flex;
   width: 100%;
+  height: 52px;
 }
 
 .search__input {
@@ -59,4 +60,14 @@
 
 .search__btn:hover {
   opacity: 0.9;
+}
+
+@media screen and (max-width: 599px) {
+  .search {
+    flex-direction: column;
+  }
+
+  .search__btn {
+    width: 100%;
+  }
 }

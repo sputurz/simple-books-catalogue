@@ -45,3 +45,9 @@
 .favorites__card-list-wrap {
   padding: 15px;
 }
+
+@media screen and (max-width: 1023px) {
+  .favorites {
+    margin-top: 50px;
+  }
+}

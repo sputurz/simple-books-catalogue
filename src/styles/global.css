@@ -1,3 +1,5 @@
+@import './utils/container.css';
+
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&display=swap');
 
 *,
@@ -33,7 +35,6 @@ body {
   padding: 0;
   font-family: 'Source Sans 3', sans-serif;
   background-color: var(--background);
-  /* background-color: red; */
   /* font-family: 'Playfair Display', serif; */
 }
 
@@ -50,10 +51,4 @@ img {
 
 a {
   text-decoration: none;
-}
-
-.container {
-  max-width: 1726px;
-  margin: 0 auto;
-  padding: 0 24px;
 }

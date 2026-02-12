@@ -33,7 +33,7 @@ const cards = [
 
 export const Favorites = () => {
   return html`
-    <div class="favorites">
+    <div class="favorites" id="favorites-list">
       <div class="favorites__title-wrap">
         ${favIcon}
         <div class="favorites__text-wrap">

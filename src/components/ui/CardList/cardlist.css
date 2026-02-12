@@ -13,3 +13,21 @@
   flex-direction: column;
   gap: 0;
 }
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+  .card-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1199px) {
+  .card-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 799px) {
+  .card-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
