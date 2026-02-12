@@ -6,19 +6,20 @@ import { CardList } from '../CardList/CardList';
 const cards = [
   {
     key: 1,
-    title: 'The Great Gatsby',
-    author: 'F. Scott Fitzgerald',
-    year: 1925,
+    title: 'The Hobbit',
+    author: 'J.R.R. Tolkien',
+    year: 1937,
     cover: '12019545',
-    isFavorit: true,
+    isFavorite: true,
   },
   {
     key: 2,
-    title: 'Great',
-    author: 'Fitzgerald',
+    title:
+      'Great asdasd asdasd aaa asdas asda asasdasd asdasdas asdasd asdds sdsd sdasdas asdasd',
+    author: 'Fitzgerald asdasd asdasd asdasd sdd ss',
     year: 1995,
     cover: '11719266',
-    isFavorit: false,
+    isFavorite: false,
   },
   {
     key: 3,
@@ -26,7 +27,7 @@ const cards = [
     author: 'Fitzgerald',
     year: 1995,
     cover: '11719266',
-    isFavorit: false,
+    isFavorite: false,
   },
 ];
 

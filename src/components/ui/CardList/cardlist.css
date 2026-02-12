@@ -11,9 +11,5 @@
 .card-list--favorite {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-}
-
-.card-list__item {
-  /* width: 100%; */
+  gap: 0;
 }

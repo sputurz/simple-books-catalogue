@@ -39,8 +39,8 @@ const cards = [
   },
   {
     key: 2,
-    title: 'Great',
-    author: 'Fitzgerald',
+    title: 'Great  asdasda asdasd asd asdasd asdasd',
+    author: 'Fitzgerald asdasd asdasd dsfsdf dsfsdf',
     year: 1995,
     cover: '11719266',
     isFavorite: false,

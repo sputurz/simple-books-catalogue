@@ -13,7 +13,7 @@ export const CardList = (cards, isFavorite = false) => {
         .map(
           (card) => html`
             <li class="card-list__item" data-key="${card.key}">
-              ${Card(card, isFavorite ? true : false)}
+              ${Card(card, isFavorite)}
             </li>
           `,
         )
