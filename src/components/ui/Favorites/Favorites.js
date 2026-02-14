@@ -41,7 +41,7 @@ export const Favorites = () => {
           <span class="favorites__text">${0} books saved</span>
         </div>
       </div>
-      <div class="favorites__card-list-wrap">${CardList(cards, true)}</div>
+      <div class="favorites__card-list-wrap"></div>
     </div>
   `;
 };

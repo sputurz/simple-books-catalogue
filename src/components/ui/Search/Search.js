@@ -1,22 +1,52 @@
 import './search.css';
-import { escapeHtml, html } from '../../../utils/helpers';
 import searchIcon from '../../../assets/search.svg';
 
-export const Search = () => {
-  return html`
-    <div class="search">
-      <label class="search__wrap" for="search-input">
-        <input
-          class="search__input"
-          type="text"
-          placeholder="Search for books by title or author..."
-          id="search-input"
-        />
-        <img class="search__icon" alt="" src="${searchIcon}" />
-      </label>
-      <button class="search__btn" aria-label="Start search books" type="button">
-        Search
-      </button>
-    </div>
-  `;
+export const Search = (cards, onSubmit) => {
+  // const render = () => {};
+
+  const containerEl = document.createElement('div');
+  containerEl.className = 'search';
+
+  const labelEl = document.createElement('label');
+  labelEl.className = 'search__wrap';
+  labelEl.htmlFor = 'search-input';
+
+  const inputEl = document.createElement('input');
+  inputEl.className = 'search__input';
+  inputEl.type = 'text';
+  inputEl.placeholder = 'Search for books by title or author...';
+  inputEl.id = 'search-input';
+
+  const imgEl = document.createElement('img');
+  imgEl.className = 'search__icon';
+  imgEl.alt = '';
+  imgEl.src = searchIcon;
+
+  const btnEl = document.createElement('button');
+  btnEl.className = 'search__btn';
+  btnEl.ariaLabel = 'Start search books';
+  btnEl.type = 'button';
+  btnEl.textContent = 'Search';
+  btnEl.onclick = () => handleClick();
+
+  containerEl.appendChild(labelEl);
+  containerEl.appendChild(btnEl);
+
+  labelEl.appendChild(inputEl);
+  labelEl.appendChild(imgEl);
+
+  function handleClick() {
+    const text = inputEl.value.trim();
+
+    if (!text) {
+      alert('Заполни поле');
+      return;
+    }
+
+    onSubmit(text);
+
+    inputEl.value = '';
+  }
+
+  return containerEl;
 };

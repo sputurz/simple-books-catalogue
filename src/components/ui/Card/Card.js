@@ -1,35 +1,114 @@
 import './card.css';
 import favIcon from '../../../assets/heart.svg?raw';
-import { escapeHtml, html } from '../../../utils/helpers';
 
-export const Card = (card, isSmall = false) => {
-  return html`
-    <div
-      class="card ${isSmall ? 'card--small' : ''}"
-      data-key="${escapeHtml(String(card.key))}"
-    >
-      <a class="card__link" href="#">
-        <img
-          class="card__img"
-          src="https://covers.openlibrary.org/b/id/${escapeHtml(
-            String(card.cover),
-          )}-M.jpg"
-          alt="${escapeHtml(String(card.title))}"
-        />
-        <div class="card__wrap">
-          <p class="card__title">${escapeHtml(String(card.title))}</p>
-          <p class="card__author">${escapeHtml(String(card.author))}</p>
-          <span class="card__year">${escapeHtml(card.year)}</span>
-        </div>
-      </a>
-      <button
-        class="card__btn${card.isFavorite ? ' card__btn--favorite' : ''}"
-        aria-label="${card.isFavorite ? 'Delete' : 'Add'} favorite book"
-        title="${card.isFavorite ? 'Delete' : 'Add'} favorite book"
-        type="button"
-      >
-        ${favIcon}
-      </button>
-    </div>
-  `;
-};
+export class Card {
+  constructor(cardData, onLikeToggle, isSmall = false) {
+    this.cardData = cardData;
+    this.onLikeToggle = onLikeToggle;
+    this.element = this.createElement();
+    this.isSmall = isSmall;
+  }
+
+  createElement() {
+    const cardEl = document.createElement('div');
+    cardEl.className = `card ${this.isSmall ? 'card--small' : ''}`;
+
+    const aEl = document.createElement('a');
+    aEl.className = 'card__link';
+    aEl.href = `https://openlibrary.org/books/${`OL27945116M`}`; // to ORG
+    aEl.ariaLabel = 'Link to book';
+    aEl.target = '_blank';
+    aEl.rel = 'noopener noreferrer';
+
+    const imgEl = document.createElement('img');
+    imgEl.className = 'card__img';
+    imgEl.src = `https://covers.openlibrary.org/b/id/${this.cardData.cover}-M.jpg`;
+    imgEl.alt = this.cardData.title;
+
+    const wrapEl = document.createElement('div');
+    wrapEl.className = 'card__wrap';
+
+    const titleEl = document.createElement('p');
+    titleEl.className = 'card__title';
+    titleEl.textContent = this.cardData.title;
+
+    const authorEl = document.createElement('p');
+    authorEl.className = 'card__author';
+    authorEl.textContent = this.cardData.author;
+
+    const yaerEl = document.createElement('span');
+    yaerEl.className = 'card__year';
+    yaerEl.textContent = this.cardData.year;
+
+    const btnEl = document.createElement('button');
+    btnEl.className = `card__btn ${this.cardData.isFavorite ? ' card__btn--favorite' : ''}`;
+    btnEl.type = 'button';
+    btnEl.ariaLabel = this.cardData.isFavorite ? 'Delete' : 'Add';
+    btnEl.title = this.cardData.isFavorite ? 'Delete' : 'Add';
+    btnEl.onclick = () => this.onLikeToggle(this.cardData.key);
+
+    cardEl.append(aEl, btnEl);
+    aEl.append(imgEl, wrapEl);
+    wrapEl.append(titleEl, authorEl, yaerEl);
+    btnEl.innerHTML = favIcon;
+
+    return cardEl;
+  }
+
+  update(cardData) {
+    this.cardData = cardData;
+    const btnEl = this.element.querySelector('button');
+    btnEl.className = `card__btn ${this.cardData.isFavorite ? ' card__btn--favorite' : ''}`;
+    btnEl.ariaLabel = this.cardData.isFavorite ? 'Delete' : 'Add';
+    btnEl.title = this.cardData.isFavorite ? 'Delete' : 'Add';
+  }
+
+  getElement() {
+    return this.element;
+  }
+}
+
+// export const Card = (card, isSmall = false) => {
+//   const containerEl = document.createElement('div');
+//   containerEl.className = `card ${isSmall ? 'card--small' : ''}`;
+
+//   const aEl = document.createElement('a');
+//   aEl.className = 'card__link';
+//   aEl.href = `https://openlibrary.org/books/${`OL27945116M`}`; // to ORG
+//   aEl.ariaLabel = 'Link to book';
+//   aEl.target = '_blank';
+//   aEl.rel = 'noopener noreferrer';
+
+//   const imgEl = document.createElement('img');
+//   imgEl.className = 'card__img';
+//   imgEl.src = `https://covers.openlibrary.org/b/id/${card.cover}-M.jpg`;
+//   imgEl.alt = card.title;
+
+//   const wrapEl = document.createElement('div');
+//   wrapEl.className = 'card__wrap';
+
+//   const titleEl = document.createElement('p');
+//   titleEl.className = 'card__title';
+//   titleEl.textContent = card.title;
+
+//   const authorEl = document.createElement('p');
+//   authorEl.className = 'card__author';
+//   authorEl.textContent = card.author;
+
+//   const yaerEl = document.createElement('span');
+//   yaerEl.className = 'card__year';
+//   yaerEl.textContent = card.year;
+
+//   const btnEl = document.createElement('button');
+//   btnEl.className = `card__btn ${card.isFavorite ? ' card__btn--favorite' : ''}`;
+//   btnEl.type = 'button';
+//   btnEl.ariaLabel = card.isFavorite ? 'Delete' : 'Add';
+//   btnEl.title = card.isFavorite ? 'Delete' : 'Add';
+
+//   containerEl.append(aEl, btnEl);
+//   aEl.append(imgEl, wrapEl);
+//   wrapEl.append(titleEl, authorEl, yaerEl);
+//   btnEl.innerHTML = favIcon;
+
+//   return containerEl;
+// };
