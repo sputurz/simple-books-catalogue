@@ -23,18 +23,11 @@ https://drive.google.com/file/d/1RBRcuH-_oAvtjem5Xs0c4NXZ8I38aYyH/view
 
 ## How to run the app
 
-# Install dependencies
-
-npm install
-
-# Start dev server
-
-npm run dev
-
-# Create optimized production build
-
-npm run build
-
-# Preview the production build locally
-
-npm run preview
+- Install dependencies
+  npm install
+- Start dev server
+  npm run dev
+- Create optimized production build
+  npm run build
+- Preview the production build locally
+  npm run preview
