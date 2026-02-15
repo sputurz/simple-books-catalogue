@@ -62,6 +62,13 @@
 }
 
 .card__title,
+.card__author,
+.card__year {
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.card__title,
 .card__author {
   margin: 0;
 }

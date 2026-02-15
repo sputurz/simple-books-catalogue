@@ -1,13 +1,7 @@
-import './styles/global.css';
-import { App } from './components/sections/MainPage/MainPage';
+import { App } from './app';
+import './styles/styles.css';
 
-// убрать
-export function createElementFromHTML(htmlString) {
-  const div = document.createElement('div');
-  div.innerHTML = htmlString.trim();
-  return div.firstChild;
-}
-
+// Init App after DOM Content Loaded
 document.addEventListener('DOMContentLoaded', () => {
   App();
 });

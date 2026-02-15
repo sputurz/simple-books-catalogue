@@ -1,24 +1,74 @@
-const urlQuerry = 'https://openlibrary.org/search.json?q=';
+const baseUrl = 'https://openlibrary.org';
 
-export async function fetchData(query) {
-  console.log('Загрузка...');
+function responseCheck(response) {
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+}
 
+export async function getBooksList(query) {
   try {
-    const response = await fetch(urlQuerry + query.replace(/ /g, '+'));
-
-    if (!response.ok) {
-      throw new Error('Ничего не найдено');
-    }
+    const response = await fetch(
+      baseUrl + '/search.json?q=' + query.replace(/ /g, '+'),
+    );
+    responseCheck(response);
 
     const data = await response.json();
+
+    if (!data.docs) {
+      return [];
+    }
+
     return data.docs;
   } catch (error) {
-    if (error.message === 'Ничего не найдено') {
-      console.log('Ничего не найдено');
-    } else {
-      console.log('Ошибка сети');
+    console.log(error);
+  }
+}
+
+export async function getBook(key) {
+  try {
+    const response = await fetch(`${baseUrl}${key}.json`);
+    responseCheck(response);
+
+    const bookData = await response.json();
+
+    if (!bookData) {
+      return null;
     }
-  } finally {
-    console.log('Финиш...');
+
+    return bookData;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+}
+
+export async function getAuthor(authorKey) {
+  try {
+    const response = await fetch(`${baseUrl}${authorKey}.json`);
+    responseCheck(response);
+
+    const authorData = await response.json();
+
+    if (!authorData) return '';
+
+    return authorData.name;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getAuthors(authorsList) {
+  try {
+    let authors = '';
+
+    for (let i = 0; i < authorsList.length; i++) {
+      const author = await getAuthor(authorsList[i].author.key);
+      if (author) authors += author + ', ';
+    }
+
+    return authors.slice(0, -2);
+  } catch (error) {
+    console.log(error);
   }
 }

@@ -1,22 +1,23 @@
 const itemKey = 'favorite-keys';
+const fallback = [];
 
-export const saveListToLS = (list) => {
+export const saveItemToLS = (item) => {
   try {
-    localStorage.setItem(itemKey, JSON.stringify(list));
+    localStorage.setItem(itemKey, JSON.stringify(item));
   } catch (error) {
-    console.error('Failed to save list', error);
+    console.error('Failed to save item', error);
   }
 };
 
-export const loadListFromLS = () => {
+export const loadItemFromLS = () => {
   try {
-    const list = localStorage.getItem(itemKey);
+    const item = localStorage.getItem(itemKey);
 
-    return list ? JSON.parse(list) : [];
+    return item ? JSON.parse(item) : fallback;
   } catch (error) {
-    console.error('Failed to load list', error);
-    saveList([]);
+    console.error('Failed to load item', error);
+    saveItemToLS(fallback);
 
-    return [];
+    return fallback;
   }
 };

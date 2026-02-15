@@ -45,4 +45,8 @@ export class CardList {
   hasItem(key) {
     return this.itemsMap.has(key);
   }
+
+  getKeys() {
+    return Array.from(this.itemsMap.keys());
+  }
 }

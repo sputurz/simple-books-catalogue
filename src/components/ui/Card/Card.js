@@ -5,24 +5,25 @@ export class Card {
   constructor(cardData, onLikeToggle, isSmall = false) {
     this.cardData = cardData;
     this.onLikeToggle = onLikeToggle;
-    this.element = this.createElement();
     this.isSmall = isSmall;
+    this.element = this.createElement();
   }
 
   createElement() {
     const cardEl = document.createElement('div');
     cardEl.className = `card ${this.isSmall ? 'card--small' : ''}`;
 
+    // link to openlibrary.org book webpage
     const aEl = document.createElement('a');
     aEl.className = 'card__link';
-    aEl.href = `https://openlibrary.org/books/${`OL27945116M`}`; // to ORG
+    aEl.href = `https://openlibrary.org${this.cardData.key}}`;
     aEl.ariaLabel = 'Link to book';
     aEl.target = '_blank';
     aEl.rel = 'noopener noreferrer';
 
     const imgEl = document.createElement('img');
     imgEl.className = 'card__img';
-    imgEl.src = `https://covers.openlibrary.org/b/id/${this.cardData.cover}-M.jpg`;
+    imgEl.src = this.cardData.cover;
     imgEl.alt = this.cardData.title;
 
     const wrapEl = document.createElement('div');
@@ -67,48 +68,3 @@ export class Card {
     return this.element;
   }
 }
-
-// export const Card = (card, isSmall = false) => {
-//   const containerEl = document.createElement('div');
-//   containerEl.className = `card ${isSmall ? 'card--small' : ''}`;
-
-//   const aEl = document.createElement('a');
-//   aEl.className = 'card__link';
-//   aEl.href = `https://openlibrary.org/books/${`OL27945116M`}`; // to ORG
-//   aEl.ariaLabel = 'Link to book';
-//   aEl.target = '_blank';
-//   aEl.rel = 'noopener noreferrer';
-
-//   const imgEl = document.createElement('img');
-//   imgEl.className = 'card__img';
-//   imgEl.src = `https://covers.openlibrary.org/b/id/${card.cover}-M.jpg`;
-//   imgEl.alt = card.title;
-
-//   const wrapEl = document.createElement('div');
-//   wrapEl.className = 'card__wrap';
-
-//   const titleEl = document.createElement('p');
-//   titleEl.className = 'card__title';
-//   titleEl.textContent = card.title;
-
-//   const authorEl = document.createElement('p');
-//   authorEl.className = 'card__author';
-//   authorEl.textContent = card.author;
-
-//   const yaerEl = document.createElement('span');
-//   yaerEl.className = 'card__year';
-//   yaerEl.textContent = card.year;
-
-//   const btnEl = document.createElement('button');
-//   btnEl.className = `card__btn ${card.isFavorite ? ' card__btn--favorite' : ''}`;
-//   btnEl.type = 'button';
-//   btnEl.ariaLabel = card.isFavorite ? 'Delete' : 'Add';
-//   btnEl.title = card.isFavorite ? 'Delete' : 'Add';
-
-//   containerEl.append(aEl, btnEl);
-//   aEl.append(imgEl, wrapEl);
-//   wrapEl.append(titleEl, authorEl, yaerEl);
-//   btnEl.innerHTML = favIcon;
-
-//   return containerEl;
-// };
