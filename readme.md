@@ -24,10 +24,32 @@ https://drive.google.com/file/d/1RBRcuH-_oAvtjem5Xs0c4NXZ8I38aYyH/view
 ## How to run the app
 
 - Install dependencies
+
+```bash
   npm install
+```
+
 - Start dev server
+
+```bash
   npm run dev
+```
+
 - Create optimized production build
-  npm run build
+
+```bash
+ npm run build
+```
+
 - Preview the production build locally
-  npm run preview
+
+```bash
+   npm run preview
+```
+
+- Deploy on Git Pages
+
+```bash
+   npm run build
+   npm run deploy
+```
