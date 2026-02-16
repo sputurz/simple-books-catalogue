@@ -2,8 +2,6 @@ import { getAuthors } from './api';
 import imgFallback from '../assets/no-cover.svg';
 
 const strFallback = 'no info';
-// const imgFallback = '/assets/no-cover.jpg';
-// const imgFallback = '../../../assets/no-cover.svg';
 const baseUrl = `https://covers.openlibrary.org/b/id/{cover}-M.jpg`;
 
 // Api booklist to cardList model

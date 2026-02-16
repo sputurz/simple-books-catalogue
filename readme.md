@@ -8,6 +8,7 @@ A web application that allows you to search for books by title via a public API,
 - Display book covers, titles, authors, and first publication years
 - Add/remove books to favorites stored in localStorage
 - Adaptive layout
+- Smart DOM reload cards
 
 ## Tech Stack
 

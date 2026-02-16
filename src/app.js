@@ -20,16 +20,7 @@ export const App = async () => {
 
   // var store
   let searchQuery = '';
-  let searchList = [
-    // {
-    //   author: 'Илья Арнольдович Ильф, Евгений Петрович Петров',
-    //   cover: 'https://covers.openlibrary.org/b/id/13111119-M.jpg',
-    //   isFavorite: true,
-    //   key: '/works/OL2196450W',
-    //   title: 'Двенадцать стульев',
-    //   year: 1938,
-    // },
-  ];
+  let searchList = [];
   let favoriteKeys = loadItemFromLS();
   let favoriteList = await initFavorite(favoriteKeys);
 
