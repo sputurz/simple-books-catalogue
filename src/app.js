@@ -1,7 +1,7 @@
-import { CardList } from './components/CardList/CardList';
-import { getBooksList } from './utils/api';
+import { initFavoriteList } from './features/favoriteList';
+import { initSearch } from './features/search';
+import { initSearchList } from './features/searchList';
 import { initFavorite } from './utils/favorite';
-import { bookListToCardList } from './utils/mappers';
 import { loadItemFromLS, saveItemToLS } from './utils/localStorage';
 
 export const App = async () => {
@@ -17,14 +17,13 @@ export const App = async () => {
     '.favorites__card-list-wrap',
   );
 
-  // Var store
-  let searchQuery = '';
+  // Data store
   let searchList = [];
   let favoriteKeys = loadItemFromLS();
   let favoriteList = await initFavorite(favoriteKeys);
 
   // Handlers
-  function handleLikeToggle(key) {
+  function handleSearchLikeToggle(key) {
     const bookFromSearch = searchList.find((item) => item.key === key);
 
     if (bookFromSearch) {
@@ -33,104 +32,63 @@ export const App = async () => {
       if (bookFromSearch.isFavorite) {
         favoriteList.push(bookFromSearch);
         favoriteKeys.push(key);
+        favoriteListUI.addFavoriteItem(bookFromSearch);
       } else {
         favoriteList = favoriteList.filter((item) => item.key !== key);
         favoriteKeys = favoriteKeys.filter((item) => item !== key);
+        favoriteListUI.removeFavoriteItem(key);
       }
 
       saveItemToLS(favoriteKeys);
-
       favoriteQtyEl.textContent = favoriteKeys.length;
-      searchListEl.updateItem(bookFromSearch);
-
-      if (bookFromSearch.isFavorite) {
-        favoriteListEl.addItem(bookFromSearch);
-      } else {
-        favoriteListEl.removeItem(key);
-      }
+      searchListUI.updateSearchListItem(bookFromSearch);
     }
   }
 
-  async function handleSearchBtnClick(searchList) {
-    const currentSearchQuery = searchInputEl.value.trim();
-    searchErrorEl.classList.remove('search__info--result');
-    searchErrorEl.classList.remove('search__info--error');
+  function handleFavoriteLikeToggle(key) {
+    const bookFromFavorite = favoriteList.find((item) => item.key === key);
 
-    if (!currentSearchQuery) {
-      searchErrorEl.classList.add('search__info--result');
-      searchErrorEl.textContent = 'Empty request';
-
-      return;
-    } else if (currentSearchQuery === searchQuery) {
-      return;
-    }
-
-    searchBtnEl.disabled = true;
-    searchInputEl.disabled = true;
-    searchBtnEl.textContent = 'Loading...';
-
-    try {
-      const bookList = await getBooksList(currentSearchQuery);
-
-      if (!bookList || bookList.length === 0) {
-        searchErrorEl.classList.add('search__info--error');
-        searchErrorEl.textContent = 'No books found';
-        return;
+    if (bookFromFavorite) {
+      const bookFromSearch = searchList.find((item) => item.key === key);
+      if (bookFromSearch) {
+        bookFromSearch.isFavorite = false;
+        searchListUI.updateSearchListItem(bookFromSearch);
       }
 
-      searchList = bookListToCardList(bookList, searchList, favoriteKeys);
-      renderSearchList(searchList);
+      favoriteList = favoriteList.filter((item) => item.key !== key);
+      favoriteKeys = favoriteKeys.filter((item) => item !== key);
 
-      searchQuery = currentSearchQuery;
-
-      console.log(searchList);
-    } catch (error) {
-      console.error(error);
-      searchErrorEl.classList.add('search__info--error');
-      searchErrorEl.textContent = `Error: ${error}`;
-    } finally {
-      searchBtnEl.disabled = false;
-      searchInputEl.disabled = false;
-      searchBtnEl.textContent = 'Search';
+      saveItemToLS(favoriteKeys);
+      favoriteQtyEl.textContent = favoriteKeys.length;
+      favoriteListUI.removeFavoriteItem(key);
     }
   }
-  //   Funcctions
 
-  function renderFavoriteList() {
-    favoriteQtyEl.textContent = favoriteKeys.length;
-    favoriteList.forEach((item) => {
-      favoriteListEl.addItem(item);
-    });
-  }
-
-  function renderSearchList(searchList) {
-    const newKeys = searchList.map((item) => item.key);
-
-    searchListEl.getKeys().forEach((key) => {
-      if (!newKeys.includes(key)) {
-        searchListEl.removeItem(key);
-      }
-    });
-
-    searchList.forEach((item) => {
-      if (searchListEl.hasItem(item.key)) {
-        searchListEl.updateItem(item);
-      } else {
-        searchListEl.addItem(item);
-      }
-    });
-  }
-
-  //create and change UI
-  const searchListEl = new CardList(searchListContainerEl, handleLikeToggle);
-  const favoriteListEl = new CardList(
-    favoriteListContainerEl,
-    handleLikeToggle,
-    true,
+  // Init
+  const searchListUI = initSearchList(
+    searchListContainerEl,
+    handleSearchLikeToggle,
   );
-  searchBtnEl.addEventListener('click', () => {
-    handleSearchBtnClick(searchList);
-  });
+  const favoriteListUI = initFavoriteList(
+    favoriteListContainerEl,
+    favoriteQtyEl,
+    handleFavoriteLikeToggle,
+  );
 
-  renderFavoriteList();
+  initSearch(
+    searchInputEl,
+    searchBtnEl,
+    searchErrorEl,
+    favoriteKeys,
+    (newSearchList) => {
+      searchList = newSearchList;
+      searchListUI.renderSearchList(searchList);
+    },
+    (errorMessage) => {
+      searchErrorEl.classList.add('search__info--error');
+      searchErrorEl.textContent = errorMessage;
+    },
+  );
+
+  favoriteListUI.renderFavoriteList(favoriteList, favoriteKeys);
 };

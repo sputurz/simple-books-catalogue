@@ -21,7 +21,7 @@ export async function getBooksList(query) {
 
     return data.docs;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     throw error;
   }
 }
@@ -39,7 +39,7 @@ export async function getBook(key) {
 
     return bookData;
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return null;
   }
 }
@@ -55,7 +55,7 @@ export async function getAuthor(authorKey) {
 
     return authorData.name;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 
@@ -70,6 +70,6 @@ export async function getAuthors(authorsList) {
 
     return authors.slice(0, -2);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
