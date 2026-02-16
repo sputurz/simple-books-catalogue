@@ -60,15 +60,17 @@ https://drive.google.com/file/d/1RBRcuH-_oAvtjem5Xs0c4NXZ8I38aYyH/view
 
 ## Project structure
 
-├──src/  
-| ├── assets/ - stores SVG content (.svg files)
-| ├── components/ - stores UI reuseble components (.js and .css files)
-| ├── features/ - stores component logic (.js files)
-| ├── styles/ - stores style CSS (.css files)
-| ├── utils/ - stores small utils block (.js files)
-| ├──app.js - stores all App logic
-| ├──main.js - main JS module file
-├──index.html - main HTML file
-├──package.json - main NPM file
-├──vite.config.js - vite configuration file
-├──readme.md - you are here
+```
+├── src/
+│   ├── assets/ - stores SVG content (.svg files)
+│   ├── components/ - stores UI reusable components (.js and .css files)
+│   ├── features/ - stores components logic (.js files)
+│   ├── styles/ - stores styles CSS (.css files)
+│   ├── utils/ - stores small utils blocks (.js files)
+│   ├── app.js - stores all App logic
+│   └── main.js - main JS module file
+├── index.html - main HTML file
+├── package.json - main NPM file
+├── vite.config.js - vite configuration file
+└── readme.md - you are here
+```
