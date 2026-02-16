@@ -1,5 +1,5 @@
 import { getBook } from './api';
-import { booksDataToCard } from './helpers';
+import { booksDataToCard } from './mappers';
 import { saveItemToLS } from './localStorage';
 
 export async function initFavorite(favoriteKeys) {

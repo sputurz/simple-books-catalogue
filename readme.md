@@ -20,6 +20,9 @@ A web application that allows you to search for books by title via a public API,
 
 ## Task
 
+Develop a small web application (without using any libraries or frameworks) that allows users to search for books by title via a Open Library API, view results, and add books to favorites while storing data.
+Detailed information about the task in the document:
+
 https://drive.google.com/file/d/1RBRcuH-_oAvtjem5Xs0c4NXZ8I38aYyH/view
 
 ## How to run the app
@@ -54,3 +57,18 @@ https://drive.google.com/file/d/1RBRcuH-_oAvtjem5Xs0c4NXZ8I38aYyH/view
    npm run build
    npm run deploy
 ```
+
+## Project structure
+
+├──src/  
+| ├── assets/ - stores SVG content (.svg files)
+| ├── components/ - stores UI reuseble components (.js and .css files)
+| ├── features/ - stores component logic (.js files)
+| ├── styles/ - stores style CSS (.css files)
+| ├── utils/ - stores small utils block (.js files)
+| ├──app.js - stores all App logic
+| ├──main.js - main JS module file
+├──index.html - main HTML file
+├──package.json - main NPM file
+├──vite.config.js - vite configuration file
+├──readme.md - you are here

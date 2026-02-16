@@ -1,9 +1,8 @@
-import { CardList } from './components/ui/CardList/CardList';
+import { CardList } from './components/CardList/CardList';
 import { getBooksList } from './utils/api';
 import { initFavorite } from './utils/favorite';
-import { bookListToCardList } from './utils/helpers';
+import { bookListToCardList } from './utils/mappers';
 import { loadItemFromLS, saveItemToLS } from './utils/localStorage';
-import './utils/search';
 
 export const App = async () => {
   // Searching containers by QS in DOM
@@ -18,7 +17,7 @@ export const App = async () => {
     '.favorites__card-list-wrap',
   );
 
-  // var store
+  // Var store
   let searchQuery = '';
   let searchList = [];
   let favoriteKeys = loadItemFromLS();

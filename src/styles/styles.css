@@ -3,6 +3,7 @@
 /* global */
 @import './global.css';
 /* util */
+@import './utils/normalize.css';
 @import './utils/container.css';
 /* layout */
 @import './layout/header.css';

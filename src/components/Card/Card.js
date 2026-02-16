@@ -1,5 +1,5 @@
 import './card.css';
-import favIcon from '../../../assets/heart.svg?raw';
+import favIcon from '../../assets/heart.svg?raw';
 
 export class Card {
   constructor(cardData, onLikeToggle, isSmall = false) {
